@@ -1,0 +1,5 @@
+C:\Users\Pedro\documents\visual studio 2015\Projects\MyInputBox\MyInputBox\bin\Debug\MyInputBox.dll
+C:\Users\Pedro\documents\visual studio 2015\Projects\MyInputBox\MyInputBox\bin\Debug\MyInputBox.pdb
+C:\Users\Pedro\documents\visual studio 2015\Projects\MyInputBox\MyInputBox\obj\Debug\MyInputBox.dll
+C:\Users\Pedro\documents\visual studio 2015\Projects\MyInputBox\MyInputBox\obj\Debug\MyInputBox.pdb
+C:\Users\Pedro\Documents\Visual Studio 2015\Projects\MyInputBox\MyInputBox\obj\Debug\MyInputBox.csprojResolveAssemblyReference.cache
