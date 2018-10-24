@@ -1,28 +1,43 @@
 ﻿using System.Windows.Forms;
+using System.Collections.Generic;
 namespace MyInputBox
 {
     public partial class InputBox : Form
     {
         private static TextBox txtResposta = new TextBox() { Name = "txtResp", AutoSize = false, Visible = false };
         private static NumericUpDown nudResposta = new NumericUpDown() { Name = "nudResp", AutoSize = false, Visible = false };
+        private static ListBox lbResposta = new ListBox() { Name = "lbResposta", Visible = false };
         private static Label lblDescrição = new Label() { Name = "lblDesc", AutoSize = true, Visible = true };
         public InputBox()
         {
             nudResposta.Visible = false;
             txtResposta.Visible = false;
+            lbResposta.Visible = false;
             nudResposta.ResetText();
             txtResposta.Text = null;
-            lblDescrição.Text = null;            
+            lblDescrição.Text = null;
+            lbResposta.DataSource = null;       
             Controls.Add(txtResposta);
             Controls.Add(lblDescrição);
             Controls.Add(nudResposta);
+            Controls.Add(lbResposta);
             txtResposta.KeyDown += Resposta_KeyDown;
             nudResposta.KeyDown += Resposta_KeyDown;
+            lbResposta.KeyDown += LbResposta_KeyDown; ;
             FormClosing += InputBox_FormClosing;
             FormClosed += InputBox_FormClosed;
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Size = new System.Drawing.Size(300, 68);
             StartPosition = FormStartPosition.CenterScreen;
+        }
+
+        private void LbResposta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 13)
+            {
+                e.SuppressKeyPress = true;
+                Close();
+            }
         }
 
         private void InputBox_FormClosed(object sender, FormClosedEventArgs e)
@@ -146,14 +161,25 @@ namespace MyInputBox
             Form.ShowDialog();
             return txtResposta.Text;
         }
+        public static string ShowEnumerable(IEnumerable<object> arg)
+        {
+            InputBox Form = new InputBox();
+            lbResposta.Visible = true;
+            lbResposta.DataSource = arg;
+            Comum();
+            Form.AutoSize = true;
+            Form.Width = lbResposta.Width + 38;
+            Form.ShowDialog();
+            return lbResposta.SelectedValue.ToString();
+        }
         private static void Comum()
         {
             lblDescrição.Location = new System.Drawing.Point(12,9);
             lblDescrição.Refresh();
             txtResposta.Location = new System.Drawing.Point(18 + lblDescrição.Width, 6);
             nudResposta.Location = new System.Drawing.Point(18 + lblDescrição.Width, 6);
+            lbResposta.Location = new System.Drawing.Point(12 + lblDescrição.Width, 6);
             txtResposta.Size = new System.Drawing.Size(254 - lblDescrição.Width, 20);
-                     
         }
     }
 }
